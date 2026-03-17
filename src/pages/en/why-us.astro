@@ -5,16 +5,48 @@ import { t } from '../../i18n/utils';
 const lang = 'en';
 
 const advantages = [
-  { title: 'Reduced & Predictable Costs', desc: 'Lower costs (10-50% compared to an employee) while benefiting from a multidisciplinary IT department. Fully deductible expenses.' },
-  { title: 'Complete Expert Team', desc: 'An entire team, ranging from network and server specialists to security and cloud experts, ready to support your business.' },
-  { title: 'Monitoring & Security', desc: 'We continuously supervise your infrastructure to prevent risks. We implement strict policies and rapid backup solutions.' },
-  { title: 'Stability & Continuity', desc: 'We eliminate issues related to vacations or unavailability. A secondary administrator is always ready to take over.' },
-  { title: 'Equipment Availability', desc: 'We have diagnostic and temporary backup hardware in stock, ready to be deployed immediately without costly investments.' },
-  { title: 'Transparent System', desc: 'Every request is logged into our ticketing system, allowing you to track progress and resolution speed in real time.' },
+  {
+    title: 'Reduced & Predictable Costs',
+    desc: 'Lower costs (10-50% compared to an employee) while benefiting from a multidisciplinary IT department. Fully deductible expenses.',
+    icon: '<circle cx="12" cy="12" r="9" stroke-width="1.5"/><path d="M12 6v12" stroke-width="1.5" stroke-linecap="round"/><path d="M9 9.5c0-1.5 1.34-2.5 3-2.5s3 1 3 2.5-1.34 2-3 2-3 .5-3 2 1.34 2.5 3 2.5 3-1 3-2.5" stroke-width="1.5" stroke-linecap="round" fill="none"/>',
+  },
+  {
+    title: 'Complete Expert Team',
+    desc: 'An entire team, ranging from network and server specialists to security and cloud experts, ready to support your business.',
+    icon: '<circle cx="12" cy="7.5" r="3" stroke-width="1.5"/><path d="M5.5 21v-1.5a6.5 6.5 0 0 1 13 0V21" stroke-width="1.5" stroke-linecap="round"/><circle cx="19.5" cy="8.5" r="2" stroke-width="1.5" opacity="0.6"/><path d="M22 21v-1a4 4 0 0 0-3-3.87" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/><circle cx="4.5" cy="8.5" r="2" stroke-width="1.5" opacity="0.6"/><path d="M2 21v-1a4 4 0 0 1 3-3.87" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>',
+  },
+  {
+    title: 'Monitoring & Security',
+    desc: 'We continuously supervise your infrastructure to prevent risks. We implement strict policies and rapid backup solutions.',
+    icon: '<path d="M12 2L4 6v5c0 5.25 3.5 10 8 11 4.5-1 8-5.75 8-11V6l-8-4z" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12" r="2" stroke-width="1.5"/><path d="M8.5 12c1-1.5 2-2.5 3.5-2.5s2.5 1 3.5 2.5c-1 1.5-2 2.5-3.5 2.5S9.5 13.5 8.5 12z" stroke-width="1.5"/>',
+  },
+  {
+    title: 'Stability & Continuity',
+    desc: 'We eliminate issues related to vacations or unavailability. A secondary administrator is always ready to take over.',
+    icon: '<path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
+  },
+  {
+    title: 'Equipment Availability',
+    desc: 'We have diagnostic and temporary backup hardware in stock, ready to be deployed immediately without costly investments.',
+    icon: '<rect x="3" y="2" width="18" height="7" rx="2" stroke-width="1.5"/><rect x="3" y="15" width="18" height="7" rx="2" stroke-width="1.5"/><path d="M12 9v6" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="5.5" r="1" stroke-width="1"/><circle cx="7" cy="18.5" r="1" stroke-width="1"/>',
+  },
+  {
+    title: 'Transparent System',
+    desc: 'Every request is logged into our ticketing system, allowing you to track progress and resolution speed in real time.',
+    icon: '<rect x="5" y="4" width="14" height="17" rx="2" stroke-width="1.5"/><path d="M9 2v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V2" stroke-width="1.5"/><path d="M9 11h6M9 15h4" stroke-width="1.5" stroke-linecap="round"/>',
+  },
+];
+
+const stats = [
+  { value: 10, suffix: '+', label: 'Years Experience', decimals: 0 },
+  { value: 100, suffix: '+', label: 'Active Clients', decimals: 0 },
+  { value: 24, suffix: '/7', label: 'Tech Support', decimals: 0 },
+  { value: 99.9, suffix: '%', label: 'Uptime Guaranteed', decimals: 1 },
 ];
 ---
 
 <BaseLayout title={t(lang, 'nav.why-us')}>
+  <!-- Page Hero -->
   <section class="relative py-20 lg:py-28">
     <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,8 +65,41 @@ const advantages = [
     </div>
   </section>
 
-  <section class="py-16 lg:py-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <!-- About & Stats (Data-Rich Narrative) -->
+  <section class="py-16 lg:py-20 relative overflow-hidden">
+    <!-- Circuit Flow SVG Background -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="circuit-grad" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="var(--color-brand-blue)" stop-opacity="0.12"></stop>
+          <stop offset="100%" stop-color="var(--color-brand-teal)" stop-opacity="0.12"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0 150 H450 L470 130 H750 L770 150 H1200" stroke="url(#circuit-grad)" stroke-width="1"></path>
+      <path d="M0 250 H350 L370 270 H550 L570 250 H1200" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.7"></path>
+      <path d="M0 350 H500 L520 370 H800 L820 350 H1200" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.5"></path>
+      <path d="M600 80 V420" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.3"></path>
+      <path d="M450 130 V220" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.35"></path>
+      <path d="M770 150 V310" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.35"></path>
+      <path d="M350 270 V320 H400" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.25"></path>
+      <path d="M800 370 V420 H860" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.25"></path>
+      <path d="M600 250 L650 200" stroke="url(#circuit-grad)" stroke-width="1" opacity="0.2"></path>
+      <circle cx="450" cy="150" r="3.5" fill="var(--color-brand-teal)" opacity="0.35"></circle>
+      <circle cx="770" cy="150" r="3.5" fill="var(--color-brand-teal)" opacity="0.35"></circle>
+      <circle cx="350" cy="270" r="3" fill="var(--color-brand-teal)" opacity="0.25"></circle>
+      <circle cx="570" cy="250" r="3" fill="var(--color-brand-teal)" opacity="0.25"></circle>
+      <circle cx="500" cy="350" r="3" fill="var(--color-brand-teal)" opacity="0.2"></circle>
+      <circle cx="820" cy="350" r="3" fill="var(--color-brand-teal)" opacity="0.2"></circle>
+      <circle cx="600" cy="150" r="4" fill="var(--color-brand-blue)" opacity="0.4"></circle>
+      <circle cx="600" cy="250" r="4" fill="var(--color-brand-teal)" opacity="0.4"></circle>
+      <circle cx="400" cy="320" r="2" fill="var(--color-brand-teal)" opacity="0.2"></circle>
+      <circle cx="860" cy="420" r="2" fill="var(--color-brand-teal)" opacity="0.2"></circle>
+      <circle cx="650" cy="200" r="2" fill="var(--color-brand-blue)" opacity="0.2"></circle>
+      <circle cx="450" cy="220" r="2" fill="var(--color-brand-blue)" opacity="0.2"></circle>
+      <circle cx="770" cy="310" r="2" fill="var(--color-brand-teal)" opacity="0.2"></circle>
+    </svg>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div data-animate>
           <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-6">{t(lang, 'why.about.title')}</h2>
@@ -43,47 +108,105 @@ const advantages = [
             With over 10 years of experience, we have built long-lasting relationships with our clients, providing customized solutions and high-quality technical support.
           </p>
         </div>
-        <div class="grid grid-cols-2 gap-4" data-animate>
-          <div class="p-6 rounded-2xl glass-light text-center">
-            <div class="text-3xl font-bold gradient-text mb-2">10+</div>
-            <div class="text-sm text-slate-600 dark:text-slate-400">Years Experience</div>
-          </div>
-          <div class="p-6 rounded-2xl glass-light text-center">
-            <div class="text-3xl font-bold gradient-text mb-2">100+</div>
-            <div class="text-sm text-slate-600 dark:text-slate-400">Active Clients</div>
-          </div>
-          <div class="p-6 rounded-2xl glass-light text-center">
-            <div class="text-3xl font-bold gradient-text mb-2">24/7</div>
-            <div class="text-sm text-slate-600 dark:text-slate-400">Tech Support</div>
-          </div>
-          <div class="p-6 rounded-2xl glass-light text-center">
-            <div class="text-3xl font-bold gradient-text mb-2">99.9%</div>
-            <div class="text-sm text-slate-600 dark:text-slate-400">Uptime Guaranteed</div>
-          </div>
+        <div class="grid grid-cols-2 gap-5" data-animate>
+          {stats.map((stat, i) => (
+            <div
+              class="p-6 rounded-2xl bg-white/80 dark:bg-slate-950/60 backdrop-blur-xl border border-slate-200/50 dark:border-white/[0.07] text-center animate-float hover:border-brand-teal/30 transition-all duration-500"
+              style={`animation-delay: ${i * 0.8}s`}
+            >
+              <div
+                class="text-4xl sm:text-5xl font-bold gradient-text mb-2"
+                data-count-target={stat.value}
+                data-count-suffix={stat.suffix}
+                data-count-decimals={stat.decimals}
+              >
+                {stat.value.toFixed(stat.decimals)}{stat.suffix}
+              </div>
+              <div class="text-sm text-slate-600 dark:text-slate-400">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Outsourcing vs In-House Advantages -->
   <section class="py-16 lg:py-20 relative">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/3 to-transparent"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center" data-animate>
         {t(lang, 'why.advantages.title')}
       </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {advantages.map((adv, i) => (
-          <div class:list={['p-6 lg:p-8 rounded-2xl glass-light hover:shadow-lg hover:shadow-brand-blue/10 dark:hover:bg-white/10 transition-all duration-500 hover:-translate-y-1 group', i % 3 === 1 ? 'delay-100' : i % 3 === 2 ? 'delay-200' : '']} data-animate>
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue to-brand-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500">
-              <span class="text-lg font-bold text-white">{i + 1}</span>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {advantages.map((adv, i) => {
+          const gradId = `adv-grad-${i}`;
+          return (
+            <div
+              class:list={[
+                'flex flex-col sm:flex-row items-start gap-4 sm:gap-5 p-6 lg:p-7 rounded-2xl bg-white/80 dark:bg-slate-950/60 backdrop-blur-xl border border-slate-200/50 dark:border-white/[0.07] hover:border-brand-teal/30 hover:shadow-lg hover:shadow-brand-teal/10 transition-all duration-500 group',
+                i % 2 === 1 ? 'delay-100' : '',
+              ]}
+              data-animate
+            >
+              <div class="flex items-center gap-3 shrink-0 sm:min-w-[180px]">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-brand-blue/10 to-brand-teal/10 dark:from-brand-blue/20 dark:to-brand-teal/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500">
+                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="var(--color-brand-blue)"></stop>
+                        <stop offset="100%" stop-color="var(--color-brand-teal)"></stop>
+                      </linearGradient>
+                    </defs>
+                    <g stroke={`url(#${gradId})`} fill="none" set:html={adv.icon} />
+                  </svg>
+                </div>
+                <h3 class="text-base font-semibold text-slate-900 dark:text-white group-hover:text-brand-teal transition-colors duration-300">
+                  {adv.title}
+                </h3>
+              </div>
+              <div class="hidden sm:block w-px self-stretch bg-slate-200/30 dark:bg-white/[0.07]"></div>
+              <div class="flex-1">
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{adv.desc}</p>
+              </div>
             </div>
-            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-brand-teal transition-colors duration-300">
-              {adv.title}
-            </h3>
-            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{adv.desc}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  function initCountUp() {
+    const counters = document.querySelectorAll<HTMLElement>('[data-count-target]');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const target = parseFloat(el.dataset.countTarget || '0');
+          const suffix = el.dataset.countSuffix || '';
+          const decimals = parseInt(el.dataset.countDecimals || '0');
+          const duration = 2000;
+          const startTime = performance.now();
+
+          function update(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * target;
+            el.textContent = current.toFixed(decimals) + suffix;
+            if (progress < 1) requestAnimationFrame(update);
+          }
+
+          requestAnimationFrame(update);
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach((counter) => observer.observe(counter));
+  }
+
+  initCountUp();
+</script>

@@ -6,49 +6,299 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+
+const stats = [
+  { value: '10', suffix: '+', label: lang === 'ro' ? 'Ani Experiență' : 'Years Experience', icon: 'calendar' },
+  { value: '100', suffix: '+', label: lang === 'ro' ? 'Clienți Mulțumiți' : 'Happy Clients', icon: 'users' },
+  { value: '24/7', suffix: '', label: lang === 'ro' ? 'Suport Tehnic' : 'Tech Support', icon: 'clock' },
+  { value: '99.9', suffix: '%', label: lang === 'ro' ? 'Disponibilitate' : 'Uptime', icon: 'shield' },
+] as const;
 ---
 
-<section class="py-20 lg:py-28 relative">
+<section class="py-20 lg:py-28 relative overflow-hidden" id="team-vision">
+  <!-- Ambient background -->
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/3 to-transparent"></div>
+  <div class="absolute top-1/4 -left-32 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-1/4 -right-32 w-64 h-64 bg-brand-teal/5 rounded-full blur-3xl"></div>
+
+  <!-- Circuit Flow SVG Background -->
+  <svg class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true">
+    <defs>
+      <linearGradient id="circuit-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#0066CC;stop-opacity:0.12" />
+        <stop offset="100%" style="stop-color:#00B894;stop-opacity:0.12" />
+      </linearGradient>
+      <linearGradient id="circuit-grad-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#0066CC;stop-opacity:0.2" />
+        <stop offset="100%" style="stop-color:#00B894;stop-opacity:0.2" />
+      </linearGradient>
+    </defs>
+
+    <!-- Horizontal circuit traces -->
+    <line x1="5%" y1="20%" x2="45%" y2="20%" class="circuit-line" />
+    <line x1="55%" y1="30%" x2="95%" y2="30%" class="circuit-line" />
+    <line x1="10%" y1="50%" x2="42%" y2="50%" class="circuit-line" />
+    <line x1="58%" y1="50%" x2="90%" y2="50%" class="circuit-line" />
+    <line x1="15%" y1="75%" x2="48%" y2="75%" class="circuit-line" />
+    <line x1="52%" y1="80%" x2="85%" y2="80%" class="circuit-line" />
+
+    <!-- Vertical circuit traces -->
+    <line x1="45%" y1="20%" x2="45%" y2="50%" class="circuit-line" />
+    <line x1="55%" y1="30%" x2="55%" y2="50%" class="circuit-line" />
+    <line x1="50%" y1="15%" x2="50%" y2="85%" class="circuit-line" />
+
+    <!-- Diagonal connectors between columns -->
+    <line x1="42%" y1="50%" x2="58%" y2="50%" class="circuit-line" stroke-dasharray="4 4" />
+    <line x1="45%" y1="20%" x2="55%" y2="30%" class="circuit-line" stroke-dasharray="4 4" />
+    <line x1="48%" y1="75%" x2="52%" y2="80%" class="circuit-line" stroke-dasharray="4 4" />
+
+    <!-- Intersection dots -->
+    {[[45, 20], [55, 30], [42, 50], [58, 50], [50, 50], [48, 75], [52, 80],
+      [5, 20], [95, 30], [10, 50], [90, 50], [15, 75], [85, 80], [50, 15], [50, 85],
+      [45, 50], [55, 50]].map(([cx, cy]) => (
+      <circle cx={`${cx}%`} cy={`${cy}%`} r="3" class="circuit-dot" />
+    ))}
+
+    <!-- Animated pulse dots at key intersections -->
+    {[[50, 50], [45, 20], [55, 30], [48, 75]].map(([cx, cy]) => (
+      <circle cx={`${cx}%`} cy={`${cy}%`} r="5" class="circuit-pulse" />
+    ))}
+  </svg>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl mx-auto text-center mb-12" data-animate>
+    <!-- Section header -->
+    <div class="max-w-3xl mx-auto text-center mb-16" data-animate>
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-blue/10 dark:bg-brand-blue/20 border border-brand-blue/20 dark:border-brand-blue/30 mb-6">
+        <span class="w-2 h-2 rounded-full bg-brand-teal animate-pulse-glow"></span>
+        <span class="text-sm font-medium text-brand-blue dark:text-brand-blue-light tracking-wide">
+          {lang === 'ro' ? 'Despre Noi' : 'About Us'}
+        </span>
+      </div>
       <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
         {lang === 'ro' ? 'Echipa și viziunea noastră' : 'Our Team & Vision'}
       </h2>
       <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal mx-auto rounded-full"></div>
     </div>
 
-    <div class="max-w-4xl mx-auto space-y-6" data-animate>
-      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-        {lang === 'ro'
-          ? 'Într-o economie din care lipsește resursa umană, este prea costisitor să pierzi timp și bani pentru formarea unui departament IT dedicat.'
-          : 'In an economy lacking human resources, it is too costly to waste time and money building a dedicated IT department.'}
-      </p>
+    <!-- Two-column grid: narrative left, stats right -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
 
-      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-        {lang === 'ro' ? (
-          <Fragment>
-            <strong class="text-slate-900 dark:text-white">VMCLOUD SYSTEMS</strong> activează pe piața de outsourcing IT din <strong class="text-slate-900 dark:text-white">2014</strong> când a fost fondată de Mohora Bogdan, pasionat de tehnologie, cu o experiență de <strong class="text-slate-900 dark:text-white">15 ani</strong> în administrarea de hardware și software, si din dorința de a oferi servicii profesionale într-o piață dinamică și plină de provocări.
-          </Fragment>
-        ) : (
-          <Fragment>
-            <strong class="text-slate-900 dark:text-white">VMCLOUD SYSTEMS</strong> has been active in the IT outsourcing market since <strong class="text-slate-900 dark:text-white">2014</strong>, when it was founded by Mohora Bogdan, a technology enthusiast with <strong class="text-slate-900 dark:text-white">15 years</strong> of experience in hardware and software administration, driven by the desire to offer professional services in a dynamic and challenging market.
-          </Fragment>
-        )}
-      </p>
+      <!-- Left column: Narrative text -->
+      <div class="lg:col-span-7 space-y-6" data-animate>
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+          {lang === 'ro'
+            ? 'Într-o economie din care lipsește resursa umană, este prea costisitor să pierzi timp și bani pentru formarea unui departament IT dedicat.'
+            : 'In an economy lacking human resources, it is too costly to waste time and money building a dedicated IT department.'}
+        </p>
 
-      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-        {lang === 'ro' ? (
-          <Fragment>
-            În echipa noastră fiecare membru este încurajat să își urmeze pasiunile din IT și îi sunt puse la dispoziție toate resursele și timpul necesar pentru a se <strong class="text-slate-900 dark:text-white">dezvolta profesional</strong>, un lucru esențial credem noi, pentru un colectiv performant și clienți mulțumiți.
-          </Fragment>
-        ) : (
-          <Fragment>
-            In our team, every member is encouraged to follow their IT passions and is provided with all the resources and time needed to <strong class="text-slate-900 dark:text-white">grow professionally</strong> — something we believe is essential for a high-performing team and satisfied clients.
-          </Fragment>
-        )}
-      </p>
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+          {lang === 'ro' ? (
+            <Fragment>
+              <strong class="text-slate-900 dark:text-white">VMCLOUD SYSTEMS</strong> activează pe piața de outsourcing IT din <strong class="text-slate-900 dark:text-white">2014</strong> când a fost fondată de Mohora Bogdan, pasionat de tehnologie, cu o experiență de <strong class="text-slate-900 dark:text-white">15 ani</strong> în administrarea de hardware și software, si din dorința de a oferi servicii profesionale într-o piață dinamică și plină de provocări.
+            </Fragment>
+          ) : (
+            <Fragment>
+              <strong class="text-slate-900 dark:text-white">VMCLOUD SYSTEMS</strong> has been active in the IT outsourcing market since <strong class="text-slate-900 dark:text-white">2014</strong>, when it was founded by Mohora Bogdan, a technology enthusiast with <strong class="text-slate-900 dark:text-white">15 years</strong> of experience in hardware and software administration, driven by the desire to offer professional services in a dynamic and challenging market.
+            </Fragment>
+          )}
+        </p>
+
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+          {lang === 'ro' ? (
+            <Fragment>
+              În echipa noastră fiecare membru este încurajat să își urmeze pasiunile din IT și îi sunt puse la dispoziție toate resursele și timpul necesar pentru a se <strong class="text-slate-900 dark:text-white">dezvolta profesional</strong>, un lucru esențial credem noi, pentru un colectiv performant și clienți mulțumiți.
+            </Fragment>
+          ) : (
+            <Fragment>
+              In our team, every member is encouraged to follow their IT passions and is provided with all the resources and time needed to <strong class="text-slate-900 dark:text-white">grow professionally</strong> — something we believe is essential for a high-performing team and satisfied clients.
+            </Fragment>
+          )}
+        </p>
+      </div>
+
+      <!-- Right column: Floating stat counters -->
+      <div class="lg:col-span-5">
+        <div class="grid grid-cols-2 gap-4 lg:gap-5" data-animate>
+          {stats.map((stat, i) => (
+            <div
+              class:list={[
+                'stat-card group relative rounded-2xl p-5 sm:p-6 transition-all duration-300',
+                'bg-white/80 dark:bg-slate-950/60 backdrop-blur-xl',
+                'border border-slate-200/60 dark:border-white/[0.07]',
+                'hover:border-brand-teal/30 dark:hover:border-brand-teal/20',
+                'hover:shadow-lg hover:shadow-brand-teal/5',
+                i % 2 === 1 ? 'lg:translate-y-6' : '',
+                'animate-float',
+              ]}
+              style={`animation-delay: ${i * 0.8}s; animation-duration: ${6 + i * 0.5}s;`}
+            >
+              {/* Icon */}
+              <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue/10 to-brand-teal/10 dark:from-brand-blue/20 dark:to-brand-teal/20 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                {stat.icon === 'calendar' && (
+                  <svg class="w-5 h-5 text-brand-blue dark:text-brand-blue-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                  </svg>
+                )}
+                {stat.icon === 'users' && (
+                  <svg class="w-5 h-5 text-brand-blue dark:text-brand-blue-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                  </svg>
+                )}
+                {stat.icon === 'clock' && (
+                  <svg class="w-5 h-5 text-brand-blue dark:text-brand-blue-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+                {stat.icon === 'shield' && (
+                  <svg class="w-5 h-5 text-brand-blue dark:text-brand-blue-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                )}
+              </div>
+
+              {/* Counter value */}
+              <div class="flex items-baseline gap-0.5">
+                <span
+                  class="text-3xl sm:text-4xl font-bold gradient-text"
+                  data-counter={stat.value}
+                  data-suffix={stat.suffix}
+                >
+                  0{stat.suffix}
+                </span>
+              </div>
+
+              {/* Label */}
+              <p class="mt-1.5 text-sm font-medium text-slate-500 dark:text-slate-400">
+                {stat.label}
+              </p>
+
+              {/* Bottom accent line */}
+              <div class="absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-brand-teal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Circuit SVG styles */
+  .circuit-line {
+    stroke: url(#circuit-grad);
+    stroke-width: 1;
+    fill: none;
+  }
+
+  :global(html.dark) .circuit-line {
+    stroke: url(#circuit-grad-dark);
+  }
+
+  .circuit-dot {
+    fill: #0066CC;
+    opacity: 0.15;
+  }
+
+  :global(html.dark) .circuit-dot {
+    opacity: 0.25;
+  }
+
+  .circuit-pulse {
+    fill: #00B894;
+    opacity: 0;
+    animation: circuit-ping 4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .circuit-pulse:nth-child(odd) {
+    animation-delay: 1s;
+  }
+
+  .circuit-pulse:nth-child(even) {
+    animation-delay: 2.5s;
+  }
+
+  @keyframes circuit-ping {
+    0% {
+      opacity: 0.3;
+      r: 3;
+    }
+    50% {
+      opacity: 0;
+      r: 10;
+    }
+    100% {
+      opacity: 0;
+      r: 10;
+    }
+  }
+</style>
+
+<script>
+  function initCounters() {
+    const counters = document.querySelectorAll<HTMLElement>('[data-counter]');
+    if (!counters.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target as HTMLElement;
+          observer.unobserve(el);
+
+          const raw = el.dataset.counter ?? '0';
+          const suffix = el.dataset.suffix ?? '';
+
+          // Non-numeric values (e.g. "24/7") can't count up, so reveal character-by-character
+          if (isNaN(parseFloat(raw))) {
+            animateText(el, raw + suffix);
+            return;
+          }
+
+          const target = parseFloat(raw);
+          const isDecimal = raw.includes('.');
+          const duration = 2000;
+          const startTime = performance.now();
+
+          function tick(now: number) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = eased * target;
+
+            if (isDecimal) {
+              el.textContent = current.toFixed(1) + suffix;
+            } else {
+              el.textContent = Math.floor(current) + suffix;
+            }
+
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              el.textContent = raw + suffix;
+            }
+          }
+
+          requestAnimationFrame(tick);
+        });
+      },
+      { threshold: 0.3, rootMargin: '0px 0px -30px 0px' }
+    );
+
+    counters.forEach((el) => observer.observe(el));
+  }
+
+  function animateText(el: HTMLElement, text: string) {
+    const chars = text.split('');
+    let i = 0;
+    const interval = setInterval(() => {
+      i++;
+      el.textContent = chars.slice(0, i).join('');
+      if (i >= chars.length) clearInterval(interval);
+    }, 120);
+  }
+
+  // Run on initial load and Astro page transitions
+  initCounters();
+  document.addEventListener('astro:after-swap', initCounters);
+</script>
