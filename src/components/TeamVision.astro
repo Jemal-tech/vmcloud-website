@@ -248,9 +248,9 @@ const stats = [
           const raw = el.dataset.counter ?? '0';
           const suffix = el.dataset.suffix ?? '';
 
-          // Handle special "24/7" format
-          if (raw === '24/7') {
-            animateText(el, '24/7');
+          // Non-numeric values (e.g. "24/7") can't count up, so reveal character-by-character
+          if (isNaN(parseFloat(raw))) {
+            animateText(el, raw + suffix);
             return;
           }
 
