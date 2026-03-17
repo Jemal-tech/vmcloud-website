@@ -42,6 +42,11 @@ export const translations = {
     // Testimonials
     'testimonials.title': 'Ce spun clienții noștrii',
     'testimonials.subtitle': 'Încredere construită prin rezultate',
+    'testimonials.readMore': 'Citește mai mult',
+    'testimonials.readLess': 'Citește mai puțin',
+    'testimonials.verified': 'Partener Verificat',
+    'testimonials.allReviews': 'Toate Recenziile',
+    'testimonials.featured': 'Recenzii Evidențiate',
 
     // Why Us
     'why.title': 'De ce VMCloud Systems?',
@@ -122,6 +127,11 @@ export const translations = {
     // Testimonials
     'testimonials.title': 'What Our Clients Say',
     'testimonials.subtitle': 'Trust built through results',
+    'testimonials.readMore': 'Read More',
+    'testimonials.readLess': 'Read Less',
+    'testimonials.verified': 'Verified Partner',
+    'testimonials.allReviews': 'All Reviews',
+    'testimonials.featured': 'Featured Reviews',
 
     // Why Us
     'why.title': 'Why VMCloud Systems?',
