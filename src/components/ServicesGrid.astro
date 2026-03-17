@@ -9,15 +9,13 @@ interface Props {
 
 const { lang } = Astro.props;
 
-// featured=true → col-span-2 (wide bento cell); false → col-span-1
-// Bento pattern (3-col grid): [2+1] [1+2] [1+2]
 const services = [
-  { icon: 'monitor',  titleKey: 'services.admin.title'        as const, descKey: 'services.admin.desc'        as const, featured: true  },
-  { icon: 'activity', titleKey: 'services.monitoring.title'   as const, descKey: 'services.monitoring.desc'   as const, featured: false },
-  { icon: 'globe',    titleKey: 'services.hosting.title'      as const, descKey: 'services.hosting.desc'      as const, featured: false },
-  { icon: 'network',  titleKey: 'services.architecture.title' as const, descKey: 'services.architecture.desc' as const, featured: true  },
-  { icon: 'shield',   titleKey: 'services.security.title'     as const, descKey: 'services.security.desc'     as const, featured: false },
-  { icon: 'database', titleKey: 'services.backup.title'       as const, descKey: 'services.backup.desc'       as const, featured: true  },
+  { icon: 'monitor',  titleKey: 'services.admin.title'        as const, descKey: 'services.admin.desc'        as const },
+  { icon: 'activity', titleKey: 'services.monitoring.title'   as const, descKey: 'services.monitoring.desc'   as const },
+  { icon: 'globe',    titleKey: 'services.hosting.title'      as const, descKey: 'services.hosting.desc'      as const },
+  { icon: 'network',  titleKey: 'services.architecture.title' as const, descKey: 'services.architecture.desc' as const },
+  { icon: 'shield',   titleKey: 'services.security.title'     as const, descKey: 'services.security.desc'     as const },
+  { icon: 'database', titleKey: 'services.backup.title'       as const, descKey: 'services.backup.desc'       as const },
 ];
 ---
 
@@ -46,17 +44,14 @@ const services = [
       </p>
     </div>
 
-    <!-- Bento Grid — 3 columns on ≥md; stacked on mobile -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-5">
+    <!-- Uniform 3-column grid — 2 columns on md, 3 columns on lg -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((service) => (
-        <div class:list={[service.featured ? 'md:col-span-2' : '', 'flex']}>
-          <ServiceCard
-            title={t(lang, service.titleKey)}
-            description={t(lang, service.descKey)}
-            icon={service.icon}
-            featured={service.featured}
-          />
-        </div>
+        <ServiceCard
+          title={t(lang, service.titleKey)}
+          description={t(lang, service.descKey)}
+          icon={service.icon}
+        />
       ))}
     </div>
 
