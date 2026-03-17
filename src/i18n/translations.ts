@@ -23,6 +23,7 @@ export const translations = {
     'hero.cta.advantages': 'De ce noi?',
 
     // Services
+    'services.label': 'Servicii',
     'services.title': 'Serviciile Noastre',
     'services.subtitle': 'Soluții IT complete pentru afacerea ta',
     'services.admin.title': 'Administrare IT',
@@ -102,6 +103,7 @@ export const translations = {
     'hero.cta.advantages': 'Why Us?',
 
     // Services
+    'services.label': 'Our Services',
     'services.title': 'Our Services',
     'services.subtitle': 'Complete IT solutions for your business',
     'services.admin.title': 'IT Administration',
