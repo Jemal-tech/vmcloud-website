@@ -13,8 +13,13 @@ const { lang } = Astro.props;
 interface Testimonial {
   author: string;
   company: string;
+  role_ro: string;
+  role_en: string;
   quote_ro: string;
   quote_en: string;
+  rating: number;
+  featured: boolean;
+  verified: boolean;
 }
 
 // Read testimonials from YAML using Vite's glob import for raw text
@@ -27,33 +32,79 @@ try {
   console.error("Failed to parse YAML", e);
 }
 
-const delays = ['', 'delay-100', 'delay-200', 'delay-300', '', 'delay-100', 'delay-200', 'delay-300'];
+const featured = testimonials.filter(t => t.featured);
+const others = testimonials.filter(t => !t.featured);
+const featuredDelays = ['', 'delay-100', 'delay-200', 'delay-300'];
+const otherDelays = ['', 'delay-100', 'delay-200', 'delay-300'];
 ---
 
-<section class="py-20 lg:py-28 relative">
-  <!-- Background accent -->
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-blue/3 to-transparent"></div>
+<section class="py-20 lg:py-28 relative overflow-hidden bg-surface-dark">
+  <!-- Large decorative quote watermarks -->
+  <div class="absolute top-8 left-8 text-[16rem] leading-none font-serif text-white/[0.02] pointer-events-none select-none">&ldquo;</div>
+  <div class="absolute bottom-8 right-8 text-[16rem] leading-none font-serif text-white/[0.02] pointer-events-none select-none rotate-180">&ldquo;</div>
+
+  <!-- Subtle gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/5 via-transparent to-brand-teal/5 pointer-events-none"></div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section Header -->
     <div class="text-center mb-16" data-animate>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+      <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-teal/10 text-brand-teal text-sm font-medium mb-6 border border-brand-teal/20">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2z" clip-rule="evenodd" />
+        </svg>
+        {t(lang, 'testimonials.featured')}
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
         {t(lang, 'testimonials.title')}
       </h2>
-      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto">
         {t(lang, 'testimonials.subtitle')}
       </p>
-      <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal mx-auto rounded-full"></div>
+      <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-teal to-brand-blue mx-auto rounded-full"></div>
     </div>
 
-    <!-- Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {testimonials.map((testimonial, i) => (
+    <!-- Featured Testimonials - Masonry-style grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+      {featured.map((testimonial, i) => (
         <TestimonialCard
           quote={lang === 'ro' ? testimonial.quote_ro : testimonial.quote_en}
           author={testimonial.author}
           company={testimonial.company}
-          delay={delays[i] || ''}
+          role={lang === 'ro' ? testimonial.role_ro : testimonial.role_en}
+          rating={testimonial.rating}
+          featured={true}
+          verified={testimonial.verified}
+          delay={featuredDelays[i] || ''}
+          readMoreLabel={t(lang, 'testimonials.readMore')}
+          readLessLabel={t(lang, 'testimonials.readLess')}
+          verifiedLabel={t(lang, 'testimonials.verified')}
+        />
+      ))}
+    </div>
+
+    <!-- Divider with label -->
+    <div class="flex items-center gap-4 my-10" data-animate>
+      <div class="flex-1 h-px bg-gradient-to-r from-transparent to-white/10"></div>
+      <span class="text-xs uppercase tracking-widest text-slate-500 font-medium">{t(lang, 'testimonials.allReviews')}</span>
+      <div class="flex-1 h-px bg-gradient-to-l from-transparent to-white/10"></div>
+    </div>
+
+    <!-- Other Testimonials - Scrolling row -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {others.map((testimonial, i) => (
+        <TestimonialCard
+          quote={lang === 'ro' ? testimonial.quote_ro : testimonial.quote_en}
+          author={testimonial.author}
+          company={testimonial.company}
+          role={lang === 'ro' ? testimonial.role_ro : testimonial.role_en}
+          rating={testimonial.rating}
+          featured={false}
+          verified={testimonial.verified}
+          delay={otherDelays[i] || ''}
+          readMoreLabel={t(lang, 'testimonials.readMore')}
+          readLessLabel={t(lang, 'testimonials.readLess')}
+          verifiedLabel={t(lang, 'testimonials.verified')}
         />
       ))}
     </div>
