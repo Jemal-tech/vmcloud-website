@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'ro';
+
+const advantages = [
+  { title: 'Cost redus și previzibil', desc: 'Costuri reduse (10-50% față de un angajat), beneficiind de un departament multidisciplinar. Cheltuieli deductibile integral.' },
+  { title: 'Echipă complexă', desc: 'O întreagă echipă, de la specialiști rețelistică și servere, la experți securitate, gata să vă susțină afacerea.' },
+  { title: 'Monitorizare și Securitate', desc: 'Supervizăm permanent infrastructura pentru a preveni riscurile. Implementăm politici stricte și soluții de backup rapid.' },
+  { title: 'Stabilitate și Continuitate', desc: 'Eliminăm problemele legate de concedii sau indisponibilitate. Un administrator secundar preia oricând activitatea.' },
+  { title: 'Disponibilitate echipamente', desc: 'Avem pe stoc soluții hardware de diagnostic sau backup temporar, scutindu-vă de investiții costisitoare.' },
+  { title: 'Sistem transparent', desc: 'Orice solicitare este înregistrată în sistemul nostru de tickete, unde puteți urmări evoluția și rezolvarea.' },
+];
+---
+
+<BaseLayout title={t(lang, 'nav.why-us')}>
+  <!-- Page Hero -->
+  <section class="relative py-20 lg:py-28">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 animate-fade-in-up">
+          {t(lang, 'why.title')}
+        </h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed animate-fade-in-up delay-100">
+          {t(lang, 'why.subtitle')}
+        </p>
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mt-6 animate-fade-in-up delay-200">
+          Pentru o companie dinamică, de dimensiune medie, un departament IT intern este rar justificat. Datorită costurilor ridicate, cunoștințelor limitate, concediilor, investițiilor în infrastructură și problema angajării oamenilor competenți, sunt factori care încurajează externalizarea administrării rețelei de calculatoare către o companie de outsource IT.
+        </p>
+        <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal rounded-full animate-fade-in-up delay-300"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About section -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div data-animate>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-6">{t(lang, 'why.about.title')}</h2>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+            {t(lang, 'why.about.text')}
+          </p>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            Cu o experiență de peste 10 ani în domeniu, am construit relații de lungă durată cu clienții noștri, oferind soluții personalizate și suport tehnic de înaltă calitate.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4" data-animate>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">10+</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Ani Experiență</div>
+          </div>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">100+</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Clienți Activi</div>
+          </div>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">24/7</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Suport Tehnic</div>
+          </div>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">99.9%</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Uptime Garantat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Advantages Grid -->
+  <section class="py-16 lg:py-20 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/3 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center" data-animate>
+        {t(lang, 'why.advantages.title')}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {advantages.map((adv, i) => (
+          <div class:list={['p-6 lg:p-8 rounded-2xl glass-light hover:shadow-lg hover:shadow-brand-blue/10 dark:hover:bg-white/10 transition-all duration-500 hover:-translate-y-1 group', i % 3 === 1 ? 'delay-100' : i % 3 === 2 ? 'delay-200' : '']} data-animate>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue to-brand-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500">
+              <span class="text-lg font-bold text-white">{i + 1}</span>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-brand-teal transition-colors duration-300">
+              {adv.title}
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{adv.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

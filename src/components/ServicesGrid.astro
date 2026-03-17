@@ -1,0 +1,49 @@
+---
+import ServiceCard from './ServiceCard.astro';
+import { t } from '../i18n/utils';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const services = [
+  { icon: 'monitor', titleKey: 'services.admin.title' as const, descKey: 'services.admin.desc' as const },
+  { icon: 'activity', titleKey: 'services.monitoring.title' as const, descKey: 'services.monitoring.desc' as const },
+  { icon: 'globe', titleKey: 'services.hosting.title' as const, descKey: 'services.hosting.desc' as const },
+  { icon: 'network', titleKey: 'services.architecture.title' as const, descKey: 'services.architecture.desc' as const },
+  { icon: 'shield', titleKey: 'services.security.title' as const, descKey: 'services.security.desc' as const },
+  { icon: 'database', titleKey: 'services.backup.title' as const, descKey: 'services.backup.desc' as const },
+];
+
+const delays = ['', 'delay-100', 'delay-200', 'delay-100', 'delay-200', 'delay-300'];
+---
+
+<section class="py-20 lg:py-28 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-animate>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+        {t(lang, 'services.title')}
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        {t(lang, 'services.subtitle')}
+      </p>
+      <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {services.map((service, i) => (
+        <ServiceCard
+          title={t(lang, service.titleKey)}
+          description={t(lang, service.descKey)}
+          icon={service.icon}
+          delay={delays[i]}
+        />
+      ))}
+    </div>
+  </div>
+</section>

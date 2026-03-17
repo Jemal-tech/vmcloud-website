@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { t } from '../../../i18n/utils';
+
+const lang = 'en';
+
+const projects = [
+  {
+    title: 'Cremeria Emilia Romania',
+    category: 'Complete IT Administration',
+    description: 'Full IT infrastructure management for the pastry chain, including networking, servers, and support for 15+ locations.',
+    tags: ['Networking', 'Servers', '24/7 Support'],
+  },
+  {
+    title: 'Sfânta Maria Clinical Hospital',
+    category: 'Critical Infrastructure',
+    description: 'Modernization and management of IT infrastructure for one of Bucharest\'s most important medical institutions.',
+    tags: ['Security', 'Infrastructure', 'Backup'],
+  },
+  {
+    title: 'Hermann Oberth German School',
+    category: 'Educational Solutions',
+    description: 'Implementation and management of IT solutions for the educational environment, including classroom networks and e-learning systems.',
+    tags: ['E-learning', 'Networking', 'Web Hosting'],
+  },
+];
+---
+
+<BaseLayout title={t(lang, 'nav.portfolio')}>
+  <section class="relative py-20 lg:py-28">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-16">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 animate-fade-in-up">
+          {t(lang, 'portfolio.title')}
+        </h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed animate-fade-in-up delay-100">
+          {t(lang, 'portfolio.subtitle')}
+        </p>
+        <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal rounded-full animate-fade-in-up delay-200"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, i) => (
+          <article class:list={['group relative p-6 lg:p-8 rounded-2xl glass-light hover:bg-slate-900/10 dark:bg-white/10 transition-all duration-500 hover:-translate-y-1 overflow-hidden', i === 1 ? 'delay-100' : i === 2 ? 'delay-200' : '']} data-animate>
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-brand-teal/10 border border-brand-teal/20 text-brand-teal text-xs font-medium mb-4">
+              {project.category}
+            </div>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 group-hover:text-brand-teal transition-colors duration-300">
+              {project.title}
+            </h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <span class="px-2.5 py-1 rounded-lg bg-slate-900/5 dark:bg-white/5 text-xs text-slate-600 dark:text-slate-400 border border-slate-900/10 dark:border-white/5">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-blue to-brand-teal opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center" data-animate>
+        <p class="text-sm text-slate-500 italic">More projects coming soon...</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

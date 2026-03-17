@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'en';
+
+const advantages = [
+  { title: 'Reduced & Predictable Costs', desc: 'Lower costs (10-50% compared to an employee) while benefiting from a multidisciplinary IT department. Fully deductible expenses.' },
+  { title: 'Complete Expert Team', desc: 'An entire team, ranging from network and server specialists to security and cloud experts, ready to support your business.' },
+  { title: 'Monitoring & Security', desc: 'We continuously supervise your infrastructure to prevent risks. We implement strict policies and rapid backup solutions.' },
+  { title: 'Stability & Continuity', desc: 'We eliminate issues related to vacations or unavailability. A secondary administrator is always ready to take over.' },
+  { title: 'Equipment Availability', desc: 'We have diagnostic and temporary backup hardware in stock, ready to be deployed immediately without costly investments.' },
+  { title: 'Transparent System', desc: 'Every request is logged into our ticketing system, allowing you to track progress and resolution speed in real time.' },
+];
+---
+
+<BaseLayout title={t(lang, 'nav.why-us')}>
+  <section class="relative py-20 lg:py-28">
+    <div class="absolute inset-0 bg-gradient-to-b from-brand-blue/5 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 animate-fade-in-up">
+          {t(lang, 'why.title')}
+        </h1>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed animate-fade-in-up delay-100">
+          {t(lang, 'why.subtitle')}
+        </p>
+        <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mt-6 animate-fade-in-up delay-200">
+          For a dynamic, mid-sized company, an internal IT department is rarely justified. Due to high costs, limited expertise, employee leave, infrastructure investments, and the challenge of hiring competent professionals, these are all factors that encourage outsourcing computer network administration to an IT outsourcing company.
+        </p>
+        <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal rounded-full animate-fade-in-up delay-300"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div data-animate>
+          <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-6">{t(lang, 'why.about.title')}</h2>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">{t(lang, 'why.about.text')}</p>
+          <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+            With over 10 years of experience, we have built long-lasting relationships with our clients, providing customized solutions and high-quality technical support.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 gap-4" data-animate>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">10+</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Years Experience</div>
+          </div>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">100+</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Active Clients</div>
+          </div>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">24/7</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Tech Support</div>
+          </div>
+          <div class="p-6 rounded-2xl glass-light text-center">
+            <div class="text-3xl font-bold gradient-text mb-2">99.9%</div>
+            <div class="text-sm text-slate-600 dark:text-slate-400">Uptime Guaranteed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/3 to-transparent"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-12 text-center" data-animate>
+        {t(lang, 'why.advantages.title')}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {advantages.map((adv, i) => (
+          <div class:list={['p-6 lg:p-8 rounded-2xl glass-light hover:shadow-lg hover:shadow-brand-blue/10 dark:hover:bg-white/10 transition-all duration-500 hover:-translate-y-1 group', i % 3 === 1 ? 'delay-100' : i % 3 === 2 ? 'delay-200' : '']} data-animate>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-blue to-brand-teal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500">
+              <span class="text-lg font-bold text-white">{i + 1}</span>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-brand-teal transition-colors duration-300">
+              {adv.title}
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">{adv.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

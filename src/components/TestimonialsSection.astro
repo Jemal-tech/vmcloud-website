@@ -1,0 +1,61 @@
+---
+import TestimonialCard from './TestimonialCard.astro';
+import { t } from '../i18n/utils';
+import type { Lang } from '../i18n/translations';
+import { parse } from 'yaml';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+interface Testimonial {
+  author: string;
+  company: string;
+  quote_ro: string;
+  quote_en: string;
+}
+
+// Read testimonials from YAML using Vite's glob import for raw text
+let testimonials: Testimonial[] = [];
+try {
+  const yamlFiles = import.meta.glob('../content/testimonials.yaml', { query: '?raw', import: 'default', eager: true });
+  const yamlContent = Object.values(yamlFiles)[0] as string;
+  testimonials = parse(yamlContent) as Testimonial[];
+} catch (e) {
+  console.error("Failed to parse YAML", e);
+}
+
+const delays = ['', 'delay-100', 'delay-200', 'delay-300', '', 'delay-100', 'delay-200', 'delay-300'];
+---
+
+<section class="py-20 lg:py-28 relative">
+  <!-- Background accent -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-blue/3 to-transparent"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16" data-animate>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+        {t(lang, 'testimonials.title')}
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        {t(lang, 'testimonials.subtitle')}
+      </p>
+      <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {testimonials.map((testimonial, i) => (
+        <TestimonialCard
+          quote={lang === 'ro' ? testimonial.quote_ro : testimonial.quote_en}
+          author={testimonial.author}
+          company={testimonial.company}
+          delay={delays[i] || ''}
+        />
+      ))}
+    </div>
+  </div>
+</section>

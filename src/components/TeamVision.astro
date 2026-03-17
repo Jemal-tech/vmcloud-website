@@ -1,0 +1,54 @@
+---
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section class="py-20 lg:py-28 relative">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-teal/3 to-transparent"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto text-center mb-12" data-animate>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+        {lang === 'ro' ? 'Echipa și viziunea noastră' : 'Our Team & Vision'}
+      </h2>
+      <div class="mt-6 w-20 h-1 bg-gradient-to-r from-brand-blue to-brand-teal mx-auto rounded-full"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto space-y-6" data-animate>
+      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+        {lang === 'ro'
+          ? 'Într-o economie din care lipsește resursa umană, este prea costisitor să pierzi timp și bani pentru formarea unui departament IT dedicat.'
+          : 'In an economy lacking human resources, it is too costly to waste time and money building a dedicated IT department.'}
+      </p>
+
+      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+        {lang === 'ro' ? (
+          <Fragment>
+            <strong class="text-slate-900 dark:text-white">VMCLOUD SYSTEMS</strong> activează pe piața de outsourcing IT din <strong class="text-slate-900 dark:text-white">2014</strong> când a fost fondată de Mohora Bogdan, pasionat de tehnologie, cu o experiență de <strong class="text-slate-900 dark:text-white">15 ani</strong> în administrarea de hardware și software, si din dorința de a oferi servicii profesionale într-o piață dinamică și plină de provocări.
+          </Fragment>
+        ) : (
+          <Fragment>
+            <strong class="text-slate-900 dark:text-white">VMCLOUD SYSTEMS</strong> has been active in the IT outsourcing market since <strong class="text-slate-900 dark:text-white">2014</strong>, when it was founded by Mohora Bogdan, a technology enthusiast with <strong class="text-slate-900 dark:text-white">15 years</strong> of experience in hardware and software administration, driven by the desire to offer professional services in a dynamic and challenging market.
+          </Fragment>
+        )}
+      </p>
+
+      <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
+        {lang === 'ro' ? (
+          <Fragment>
+            În echipa noastră fiecare membru este încurajat să își urmeze pasiunile din IT și îi sunt puse la dispoziție toate resursele și timpul necesar pentru a se <strong class="text-slate-900 dark:text-white">dezvolta profesional</strong>, un lucru esențial credem noi, pentru un colectiv performant și clienți mulțumiți.
+          </Fragment>
+        ) : (
+          <Fragment>
+            In our team, every member is encouraged to follow their IT passions and is provided with all the resources and time needed to <strong class="text-slate-900 dark:text-white">grow professionally</strong> — something we believe is essential for a high-performing team and satisfied clients.
+          </Fragment>
+        )}
+      </p>
+    </div>
+  </div>
+</section>

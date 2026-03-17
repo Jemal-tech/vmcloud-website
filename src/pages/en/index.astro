@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ServicesGrid from '../../components/ServicesGrid.astro';
+import TeamVision from '../../components/TeamVision.astro';
+import TestimonialsSection from '../../components/TestimonialsSection.astro';
+import PdfCta from '../../components/PdfCta.astro';
+import { t } from '../../i18n/utils';
+
+const lang = 'en';
+---
+
+<BaseLayout title={t(lang, 'nav.home')}>
+  <Hero lang={lang} />
+  <ServicesGrid lang={lang} />
+  <TeamVision lang={lang} />
+  <TestimonialsSection lang={lang} />
+  <PdfCta lang={lang} />
+</BaseLayout>
