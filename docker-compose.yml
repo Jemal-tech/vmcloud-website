@@ -1,0 +1,16 @@
+
+services:
+  astro-site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vmcloud_website
+    restart: always
+    ports:
+      - "4321:4321"
+    environment:
+      - NODE_ENV=production
+    # Use volumes for local development if needed
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
