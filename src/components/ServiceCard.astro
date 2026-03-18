@@ -11,6 +11,10 @@ const { title, description, icon, delay = '' } = Astro.props;
 // Unique glow ID per icon to avoid SVG namespace collisions
 const glowId = `svc-glow-${icon}`;
 
+// Brand color constants for dual-tone icon system
+const PRIMARY = '#00d1d1';
+const SECONDARY = 'rgba(148,163,184,0.4)';
+
 // Premium dual-tone SVG icons — primary (#00d1d1 bright Teal/Cyan) + secondary (dimmed Slate-400)
 const iconData: Record<string, { primary: string; secondary: string }> = {
   // Administrare IT: Server Rack with Shield overlay and LED status dots
@@ -21,11 +25,11 @@ const iconData: Record<string, { primary: string; secondary: string }> = {
       <line x1="3" y1="15.5" x2="15" y2="15.5"/>
     `,
     primary: `
-      <circle cx="6.5" cy="5.5" r="1" fill="#00d1d1" stroke="none"/>
-      <circle cx="9" cy="5.5" r="1" fill="#00d1d1" stroke="none"/>
-      <circle cx="6.5" cy="12.2" r="1" fill="#00d1d1" stroke="none"/>
-      <circle cx="9" cy="12.2" r="1" fill="#00d1d1" stroke="none"/>
-      <circle cx="6.5" cy="18.8" r="1" fill="#00d1d1" stroke="none"/>
+      <circle cx="6.5" cy="5.5" r="1" fill="${PRIMARY}" stroke="none"/>
+      <circle cx="9" cy="5.5" r="1" fill="${PRIMARY}" stroke="none"/>
+      <circle cx="6.5" cy="12.2" r="1" fill="${PRIMARY}" stroke="none"/>
+      <circle cx="9" cy="12.2" r="1" fill="${PRIMARY}" stroke="none"/>
+      <circle cx="6.5" cy="18.8" r="1" fill="${PRIMARY}" stroke="none"/>
       <line x1="11.5" y1="5.5" x2="13.5" y2="5.5"/>
       <line x1="11.5" y1="12.2" x2="13.5" y2="12.2"/>
       <path d="M20 11.5L17.5 13v3c0 1.5 1 2.8 2.5 3.5 1.5-.7 2.5-2 2.5-3.5v-3L20 11.5z"/>
@@ -37,9 +41,9 @@ const iconData: Record<string, { primary: string; secondary: string }> = {
     secondary: `
       <rect x="1.5" y="3" width="19" height="13" rx="2"/>
       <line x1="1.5" y1="7" x2="20.5" y2="7"/>
-      <circle cx="4" cy="5" r="0.75" fill="rgba(148,163,184,0.5)" stroke="none"/>
-      <circle cx="6.5" cy="5" r="0.75" fill="rgba(148,163,184,0.5)" stroke="none"/>
-      <circle cx="9" cy="5" r="0.75" fill="rgba(148,163,184,0.5)" stroke="none"/>
+      <circle cx="4" cy="5" r="0.75" fill="${SECONDARY}" stroke="none"/>
+      <circle cx="6.5" cy="5" r="0.75" fill="${SECONDARY}" stroke="none"/>
+      <circle cx="9" cy="5" r="0.75" fill="${SECONDARY}" stroke="none"/>
     `,
     primary: `
       <polyline points="4 12 6.5 12 8 9 10.5 15 12.5 10.5 14.5 13 16 11.5 18.5 11.5"/>
@@ -89,7 +93,7 @@ const iconData: Record<string, { primary: string; secondary: string }> = {
     primary: `
       <rect x="9.5" y="12.5" width="5" height="4" rx="1"/>
       <path d="M10.5 12.5v-1.5a1.5 1.5 0 0 1 3 0v1.5"/>
-      <circle cx="12" cy="14.5" r="0.7" fill="#00d1d1" stroke="none"/>
+      <circle cx="12" cy="14.5" r="0.7" fill="${PRIMARY}" stroke="none"/>
     `,
   },
 
@@ -146,16 +150,16 @@ const data = iconData[icon] || iconData.monitor;
     <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <radialGradient id={glowId} cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stop-color="#00d1d1" stop-opacity="0.18"/>
-          <stop offset="100%" stop-color="#00d1d1" stop-opacity="0"/>
+          <stop offset="0%" stop-color={PRIMARY} stop-opacity="0.18"/>
+          <stop offset="100%" stop-color={PRIMARY} stop-opacity="0"/>
         </radialGradient>
       </defs>
       <!-- Brand Glow -->
       <circle cx="12" cy="12" r="11" fill={`url(#${glowId})`}/>
       <!-- Secondary (dimmed Slate-400) elements -->
-      <g stroke="rgba(148,163,184,0.4)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={data.secondary}/>
+      <g stroke={SECONDARY} fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={data.secondary}/>
       <!-- Primary (bright Teal/Cyan) elements -->
-      <g stroke="#00d1d1" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={data.primary}/>
+      <g stroke={PRIMARY} fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={data.primary}/>
     </svg>
   </div>
 
