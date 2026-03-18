@@ -40,7 +40,8 @@ const { lang } = Astro.props;
         <!-- CTA Button -->
         <a
           href="/pdf/prezentare-vmcloud.pdf"
-          download
+          download="prezentare-vmcloud.pdf"
+          aria-label={t(lang, 'pdf.aria')}
           class="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-slate-900 font-semibold text-sm hover:bg-brand-teal hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-teal/25"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

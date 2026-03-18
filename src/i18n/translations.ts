@@ -82,6 +82,7 @@ export const translations = {
     'pdf.title': 'Prezentarea Companiei',
     'pdf.subtitle': 'Descarcă prezentarea detaliată a serviciilor VMCloud Systems',
     'pdf.cta': 'Descarcă PDF',
+    'pdf.aria': 'Descarcă prezentarea companiei VMCloud Systems în format PDF',
 
     // Footer
     'footer.rights': 'Toate drepturile rezervate.',
@@ -167,6 +168,7 @@ export const translations = {
     'pdf.title': 'Company Presentation',
     'pdf.subtitle': 'Download the detailed VMCloud Systems services presentation',
     'pdf.cta': 'Download PDF',
+    'pdf.aria': 'Download VMCloud Systems company presentation in PDF format',
 
     // Footer
     'footer.rights': 'All rights reserved.',
