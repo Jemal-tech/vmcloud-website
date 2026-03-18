@@ -4,45 +4,55 @@ interface Props {
   description: string;
   icon: string;
   delay?: string;
-  featured?: boolean;
 }
 
-const { title, description, icon, delay = '', featured = false } = Astro.props;
+const { title, description, icon, delay = '' } = Astro.props;
 
 // Unique gradient ID per icon to avoid SVG namespace collisions
 const gradId = `svc-grad-${icon}`;
 
-// High-tech line-art SVG paths — gradient stroke applied via parent <g>
+// Premium dual-tone gradient SVG icons — advanced designs per service type
 const iconPaths: Record<string, string> = {
+  // IT Administration: System terminal screen with shield overlay badge at bottom-right corner
   monitor: `
-    <rect x="2" y="3" width="20" height="13" rx="2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M8 21h8M12 17v4" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M7 8h4M7 11.5h6" stroke-width="1.5" stroke-linecap="round"/>
+    <rect x="1" y="2" width="18" height="12" rx="2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6.5 21h7M10 14v7" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M4.5 7.5l2.5 1.5-2.5 1.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.5 10.5h5.5" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M18.5 12l-2 1-2-1v1.8c0 .85 1 1.6 2 1.9 1-.3 2-1.05 2-1.9z" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
   `,
+  // 24/7 Monitoring: Heartbeat ECG pulse line passing through a radar circle
   activity: `
-    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="12" cy="12" r="1" stroke-width="1.5"/>
-  `,
-  globe: `
     <circle cx="12" cy="12" r="9" stroke-width="1.5"/>
-    <path d="M3.6 9h16.8M3.6 15h16.8" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M12 3C9.8 6.5 9.8 17.5 12 21M12 3C14.2 6.5 14.2 17.5 12 21" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="5" stroke-width="0.8" stroke-dasharray="2 1.5"/>
+    <polyline points="3 12 6 12 8 7.5 10.5 16.5 13 9 15 14 17 12 21 12" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   `,
+  // Webhosting & Email: Cloud shape with envelope (fiber-optic cloud connection)
+  globe: `
+    <path d="M20.5 11H8.5a4.5 4.5 0 0 1 0-9A6.5 6.5 0 0 1 20.5 4a3.5 3.5 0 0 1 0 7z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="7" y="13" width="10" height="6" rx="1" stroke-width="1.5"/>
+    <path d="M7 14.5l5.5 3L18 14.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  `,
+  // IT Architecture: 3D isometric cube / node-tree blueprint
   network: `
-    <circle cx="12" cy="4.5" r="2" stroke-width="1.5"/>
-    <circle cx="4.5" cy="19.5" r="2" stroke-width="1.5"/>
-    <circle cx="19.5" cy="19.5" r="2" stroke-width="1.5"/>
-    <path d="M12 6.5v3.5M10.5 18L5.5 17.5M13.5 18L18.5 17.5M10.5 10l-4.5 7.5M13.5 10l4.5 7.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2l8 4.5v9L12 20 4 15.5v-9z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v18" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M4 6.5L12 11l8-4.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   `,
+  // Malware Protection: Shield with biometric fingerprint scan arcs
   shield: `
-    <path d="M12 2.5L4 6.5v5.5c0 5 3.6 9.7 8 11.2 4.4-1.5 8-6.2 8-11.2V6.5z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M9 12l2 2 4-4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2.5L3.5 6v5.5c0 5.2 3.7 10 8.5 11.5 4.8-1.5 8.5-6.3 8.5-11.5V6z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.5 12c0-1.38 1.12-2.5 2.5-2.5" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M8.5 14.5c0-1.93 1.57-3.5 3.5-3.5" stroke-width="1.3" stroke-linecap="round"/>
+    <path d="M7.5 17c0-2.49 2.01-4.5 4.5-4.5" stroke-width="1.3" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1" stroke-width="1.3" fill="none"/>
   `,
+  // Backup & Recovery: Double database cylinder with circular sync arrow
   database: `
-    <ellipse cx="12" cy="6" rx="8" ry="3" stroke-width="1.5"/>
-    <path d="M4 6v4c0 1.657 3.582 3 8 3s8-1.343 8-3V6" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M4 14v4c0 1.657 3.582 3 8 3s8-1.343 8-3v-4" stroke-width="1.5" stroke-linecap="round"/>
-    <path d="M4 10v4M20 10v4" stroke-width="1.5" stroke-linecap="round"/>
+    <ellipse cx="12" cy="4" rx="6.5" ry="2" stroke-width="1.5"/>
+    <path d="M5.5 4v4c0 1.1 2.91 2 6.5 2s6.5-.9 6.5-2V4" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M5.5 8v3c0 1.1 2.91 2 6.5 2s6.5-.9 6.5-2V8" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M8.5 19.5a3.5 3.5 0 0 0 7 0M15.5 17.5l1.5 2.5M15.5 17.5l-1.5 2.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   `,
 };
 
@@ -51,36 +61,38 @@ const iconPath = iconPaths[icon] || iconPaths.monitor;
 
 <div
   class:list={[
-    'group relative flex flex-col h-full rounded-2xl overflow-hidden',
-    'bg-slate-950/60 backdrop-blur-xl',
-    'border border-white/[0.07]',
+    'group relative flex flex-col h-full w-full rounded-2xl overflow-hidden',
+    'bg-[#080f1f]',
+    'border border-slate-700/40',
     'transition-all duration-500 ease-out',
-    'hover:-translate-y-1.5',
-    'hover:border-brand-teal/40',
-    'hover:shadow-[0_8px_40px_-8px_rgba(0,184,148,0.2),0_0_0_1px_rgba(0,184,148,0.15)]',
-    featured ? 'p-7 lg:p-9' : 'p-6 lg:p-8',
+    'hover:-translate-y-1',
+    'hover:border-brand-teal/60',
+    'hover:shadow-[0_0_0_1px_rgba(0,184,148,0.6),0_16px_48px_rgba(0,184,148,0.18)]',
+    'p-8',
     delay,
   ]}
   data-animate
 >
-  <!-- Top glow radial — visible on hover -->
+  <!-- Top glow radial — teal inner glow visible on hover -->
   <div
     class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl"
-    style="background: radial-gradient(ellipse 80% 50% at 50% -10%, color-mix(in srgb, var(--color-brand-teal) 10%, transparent) 0%, transparent 70%);"
+    style="background: radial-gradient(ellipse 70% 45% at 50% -5%, rgba(0,184,148,0.12) 0%, transparent 65%);"
   ></div>
 
-  <!-- Icon container -->
+  <!-- Icon container — glassmorphic with gradient background -->
   <div
     class:list={[
-      'relative flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center',
-      'bg-gradient-to-br from-brand-blue/15 to-brand-teal/15',
-      'border border-white/[0.07] group-hover:border-brand-teal/30',
+      'relative flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center mb-6',
+      'bg-gradient-to-br from-brand-blue/20 to-brand-teal/10',
+      'border border-slate-600/30',
+      'shadow-[inset_0_1px_0_rgba(255,255,255,0.07)]',
       'transition-all duration-500',
-      'group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,184,148,0.35)]',
-      featured ? 'mb-6' : 'mb-5',
+      'group-hover:border-brand-teal/40',
+      'group-hover:scale-110',
+      'group-hover:shadow-[0_0_24px_rgba(0,184,148,0.4),inset_0_1px_0_rgba(255,255,255,0.12)]',
     ]}
   >
-    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stop-color="var(--color-brand-blue)" />
@@ -93,13 +105,7 @@ const iconPath = iconPaths[icon] || iconPaths.monitor;
 
   <!-- Text content -->
   <div class="flex-1 min-w-0">
-    <h3
-      class:list={[
-        'font-bold text-white leading-snug mb-2.5',
-        featured ? 'text-xl lg:text-2xl' : 'text-lg',
-        'group-hover:text-brand-teal transition-colors duration-300',
-      ]}
-    >
+    <h3 class="font-bold text-xl text-white leading-snug mb-3 group-hover:text-brand-teal transition-colors duration-300">
       {title}
     </h3>
     <p class="text-sm text-slate-400 leading-relaxed">
